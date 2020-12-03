@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+\setlength{\parskip}{0.45\baselineskip}%
+\setlength{\parindent}{0em}%
+
+%sets margin width and header height
+\usepackage[top = 3cm, left=3cm, right=3cm, headheight = 14pt]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+% for clever lists item formatting
+\usepackage{paralist}
+%allows you to easily put properly formatted quotation marks on text.
+\usepackage{dirtytalk}
+
+%allows you to make a title page separately (i.e. not in main.tex)
+\usepackage{subfiles}
+
+%for includegraphics to work
+\usepackage[pdftex]{graphicx}
+\usepackage{microtype}
+% used in the title
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\C}{\mathsf{C}}
+\newcommand{\Obj}{\text{Obj}}
+\newcommand{\Hom}[2]{\text{Hom}_{#1}(#2)}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\begin{document}
+
+\subfile{title/title}
+\section{History}
+Category theory is a relatively new and still developing mathematical theory. 
+It was first introduced by mathematicians Samuel Eilenberg and Saunders Mac Lane in a paper titled \say{General Theory of Natural Equivalences} \cite{SamuelEilenberg1945Gton} and was a generalization and abstraction of the techniques and ideas they were employing in their research of topology.
+The following is the definition of a category that Eilenberg and Mac Lane's originally gave which varies slightly from the commonly used definition today.
+
+\begin{quote}
+    A category $\mathsf{C}$ is an aggregate of abstract elements $A$ called the objects of the category, and abstract elements $\alpha$ are called mappings of the category. A pair of mappings $\alpha_1,\alpha_2$ determine uniquely a product mapping $\alpha_2\alpha_1$ that follows the axioms listed below:
+    
+    \begin{enumerate}[\bfseries {C}1.]
+        
+        \item The triple product $\alpha_3(\alpha_2\alpha_1)$ is defined if and only if $(\alpha_3\alpha_2)\alpha_1$ is defined. When either is defined, the associative law 
+        \[\alpha_3(\alpha_2\alpha_1) = (\alpha_3\alpha_2)\alpha_1\]
+        is defined.
+        
+        \item The triple product $\alpha_3\alpha_2\alpha_1$ is defined whenever both products $\alpha_3\alpha_2$ and $\alpha_2\alpha_1$ are defined.
+        \begin{definition}
+        A mapping $e$ in $\C$ will be called an identity of $\C$ if and only if the existence of any product $e\alpha$ or $\beta e$ implies that $e\alpha = \alpha$ and $\beta e = \beta$
+        \end{definition}
+        
+        \item For each mapping $\alpha \in \C$ there is at least one identity $e_1 \in \C$ such that $\alpha e_1$ is defined and at least one identity $e_2 \in \C$ such that $e_2 \alpha$ is defined.
+        
+        \item The mapping $e_A$ corresponding to each object $A$ is an identity.
+        
+        \item For each identity $e$ of $\C$ there is a unique object $A$ of $\C$ such that $e_A = e$. 
+        
+    \end{enumerate}
+\end{quote}
+
+It is interesting to note that Eilenberg and Mac Lane make the remark that the objects can be omitted from the definition of a category due to the fact that there is a one-to-one correspondence between objects and their identities.
+By considering the map that sends an object $A$ to the identity map $e_A$ one can consider the morphism $e_A$ as the object $A$.
+However they forgo this option because it would detract from the utility of the definition; it is easier and more appealing to work with objects.
+
+Eilenberg and Mac Lane's key observation, was that it was useful not only to look at an object under a single mapping to itself but it was useful to consider all possible mappings from an object to itself \cite{MarquisJean-Pierre2009FaGP}.
+This abstraction is akin to what Felix Klein did when he studied geometry through the perspective of groups of transformations of a set and the invariant properties of that set under those transformations \cite{sep-geometry-19th}.
+Eilenberg and Mac Lanes use the example of the the relation between a vector space $V$ over a field $F$ and the set of linear transformations from $V$ to $F$ called the \say{dual space} of $V$ and denoted $\mathcal{L}(V)$.
+By considering pointwise addition and pointwise scalar multiplication for any two linear transformations in the dual space, $\mathcal{L}(V)$ is also a vector space. When $V$ is finite dimensional, there is a bijective function between $V$ and $\mathcal{L}(V)$ that preserves the structure of both vector spaces (i.e. they are isomorphic). 
+However as Eilenberg and Mac Lane point out, demonstrating that such an isomorphism exists requires a choice of basis for $V$.
+With category theory, this natural correspondence between a finite dimensional vector space and their dual space can be demonstrated without the need for a choice of basis.
+
+The definition of a category has changed slightly since Eilenberg and Mac Lane's first introduced it. 
+A more modern definition of a category taken from \cite{aluffi2009algebra} is as follows:
+
+\begin{quote}
+\begin{definition}
+A category $\C$ is a class of \textit{objects} $\Obj(\C)$, and for every two objects $A$ and $B$ of $\Obj(\C)$ there is a set $\Hom{\C}{A,B}$ subject to the following rules:
+
+\begin{enumerate}
+    \item Identity morphism: For every object $A$ of $\C$ there is at least one morphism $1_A \in \Hom{\C}{A,A}$ called the identity on $A$.
+    \item Composition of morphisms: If $f \in \Hom{\C}{A,B}$ and $g \in \Hom{\C}{A,B}$ then there is a morphism denoted $gf$ such that $gf \in \Hom{\C}{A,C}$
+    \item Composition is associative: if $f \in \Hom{\C}{A,B}$, $g \in \Hom{\C}{B,C}$, $h \in \Hom{\C}{C,D}$ then $(hg)f = h(gf)$.
+    \item The identity morphisms acts as an identity with respect to composition: for all $f \in \Hom{\C}{A,B}$, $f1_A =f$ and $1_Bf=f$
+\end{enumerate}
+\end{definition}
+
+\end{quote}
+
+The following are some examples of categories that arise in mathematics:
+
+\begin{itemize}
+    \item The category whose objects are sets and whose morphisms are usual functions.
+    \item The category whose objects are topological spaces and whose morphisms are continuous functions.
+    \item The category whose objects are vector spaces and whose morphisms are linear maps.
+    \item The category whose objects are groups and whose morphisms are group homomorphisms.
+\end{itemize}
+
+In general though, morphisms of a category do not have to be structure preserving maps \cite{sep-category-theory}. In fact they do not have to be functions in a set-theoretic sense. 
+Aluffi \cite{aluffi2009algebra} gives an example of a category whose objects are integers and for any two integers $a$ and $b$, the morphism between them is the set containing the ordered pair $(a,b)$ if $a \leq b$ and is empty otherwise.
+Composition of morphisms can then be defined in a way such that the axioms of morphisms are satisfied.
+This shows that category theory is very general and that almost any mathematical construction can be looked at through the lens of a category.
+As became evident to mathematicians, thinking about mathematics through category theory unifies certain common mathematical ideas. 
+%Pablo => about line 72, is that a conclusion of line 71? I do not follow the logic but i could be wrong. You may be on to something big though, it's just that I don't see it written. Perhaps this question helps: what did the authors do pointing out the structure and the map between parts of that structure, that previous authors had not done? Or why is it special in their case? Is it  an important pattern  of thinking that you see but not unique? (please clarify your intent here for a more compelling reading.
+
+
+
+
+Notice that in the more modern definition of a category the word \textit{class} is used.
+%PA: line #113 it says: "The objects of a category of cannot be a set ..." it should say: "The objects of a category cannot be a set..." 
+The objects of a category of cannot be a set because we would like to have a concept of a category of all sets whose morphisms are the usual set functions between two sets.
+However, because of Russell's paradox one cannot talk about the set of all sets. 
+Eilenberg and Mac Lane never formally dealt with this foundational issue but they suggested that one could use type theory or extend the Fraenkel-von Neumann-Bernays axioms to formally define a class \cite{MarquisJean-Pierre2009FaGP}. 
+For them it was simply enough that this generalization of structure and mappings between structure was applicable in their mathematics and it yielded a fruitful paradigm for studying mathematical structures. 
+In the years that proceeded Eilenberg and Mac Lane's introduction of category theory to study mathematical structures, the theory was used to set foundations of algebraic topology and homological algebra. 
+Using category theory to study these fields made it easier to find proofs of several results \cite{sep-category-theory}.
+The proofs in homological algebra were greatly facilitated by a technique called diagram chasing which is the use of commutative diagrams of morphisms to find equivalent compositions of morphisms.
+Without these techniques, it is difficult even to imagine how those results might be proved.
+
+It was not until the 1970's that mathematicians started seeing how useful category theory was to mathematics in general and they started studying category theory itself, especially the role of functors (structure-preserving maps between categories).
+This led to an expansion of research in category theory not as a means to an end but as an end itself. \cite{sep-category-theory}
+
+
+
+
+\section{Viability as a Mathematical Foundation}
+There are some misgivings for using category theory as a foundation for mathematics. The most evident one is the dubious use of a collection of objects.
+If the definition of a category requires the a definition of a collection of objects then how can category theory be taken as a primitive notion?
+Marquis \cite{MarquisJean-Pierre2009FaGP} argues that one must distinguish between the epistemic and the logical, making a parallel to transformation groups and geometry.
+One can first define an abstract transformation group and proceed to define a geometry from the abstraction even though epistemically, geometry precedes transformation groups.
+It is more natural to conceive first of geometry, the study of space, than it is to conceive transformation groups which are an abstract algebraic construction.
+In logic though this is often what is done with the study of theories and their models. 
+
+
+Efforts to axiomatize category theory have been undertaken and it was shown by Francis Lawvere that the category of sets can be axiomatized in such a way that the membership relation is not required. 
+That is, it is possible to axiomatize set theory purely in the language of category theory. \cite{PeruzziA.2006Tmoc}
+
+
+There is also something to be said for category theory's applicability to other disciplines.
+In the past 40 years it has been adopted by other scientific disciplines especially theoretical computer science as a tool to study semantics and logic of programming languages. 
+At the very least category theory is a rich and powerful paradigm for studying mathematics and a useful tool to use in other fields.
+It has recently been used to study cognitive neural networks and to explore quantum field theory in physics \cite{sep-category-theory}.
+
+
+\section{Relations to Philosophy}
+With regards to mathematical structuralism, category theory provides some advantages over set theory as a basis for the foundation of math.%
+%PA: line #150: it says "...of an object withing a structure..." it should say "...of an object within a structure..."
+Because the core thesis of structuralism is that structures are the basis of mathematical theory and that it is only the position of an object withing a structure that matters, category theory seems to be a more natural way of thinking through the structuralist perspective.
+An advantage to using category theory, which was alluded to earlier, is that it does not depend on what specific objects you are looking at.
+For example, when you are discussing properties of functions between sets, in a category theoretical perspective, properties such as injectivity and surjectivity of functions are defined in terms of how those functions interact with other functions and not on what they do to specific elements of the sets \cite{PeruzziA.2006Tmoc}.
+In this sense, category theory is more focused on the structure than how the functions are specified which is more appealing to the structuralist.
+
+
+%talk about objections here
+Opponents of the idea of using category theory as a foundation for mathematical structuralism argue that category theory is still based on notions from set theory \cite{sep-structuralism-mathematics}.
+For example category theory takes the concepts of collections and functions as primitive notions and thus still depends on set theoretical concepts.
+In fact even Eilenberg and Mac Lane argued that the axioms of category theory do not capture basic, intuitive truths but are synthetic and structural.
+
+Evidently there is still some debate as to what status category theory has in the foundation of mathematics as well as in the philosophy of mathematics.
+There are still applications to explore both inside of mathematics and in other scientific disciplines.
+Category theory has found its way also into the philosophy of language and logic, and will continue to be a useful and insightful theory for the future.  
+
+\clearpage
+\bibliography{biblio/phil567paper.bib}
+\bibliographystyle{unsrt}
+
+\end{document}
